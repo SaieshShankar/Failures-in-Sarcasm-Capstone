@@ -1,0 +1,13 @@
+id,gold,IS_prediction,GS_prediction,paired
+2_180,not_sarcastic,sarcastic,not_sarcastic,True
+2_405,not_sarcastic,not_sarcastic,not_sarcastic,True
+2_337,not_sarcastic,not_sarcastic,not_sarcastic,True
+2_105,sarcastic,sarcastic,sarcastic,True
+2_408,sarcastic,not_sarcastic,not_sarcastic,True
+2_254,sarcastic,sarcastic,sarcastic,True
+1_6092,not_sarcastic,sarcastic,sarcastic,True
+2_160,not_sarcastic,sarcastic,sarcastic,True
+2_494,sarcastic,not_sarcastic,not_sarcastic,True
+2_94,not_sarcastic,sarcastic,not_sarcastic,True
+1_2614,sarcastic,not_sarcastic,not_sarcastic,True
+2_303,sarcastic,not_sarcastic,not_sarcastic,True

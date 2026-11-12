@@ -1,0 +1,39 @@
+{
+  "dataset": "MUStARD",
+  "seed": 401,
+  "model": "gemma-4-E2B-it-Q4_0",
+  "requested_clips": 12,
+  "paired_clips": 12,
+  "paired_gold_counts": {
+    "sarcastic": 6,
+    "not_sarcastic": 6
+  },
+  "IS": {
+    "accuracy": 0.3333333333333333,
+    "macro_f1": 0.3333333333333333,
+    "confusion_matrix_gold_by_prediction": {
+      "sarcastic": {
+        "sarcastic": 2,
+        "not_sarcastic": 4
+      },
+      "not_sarcastic": {
+        "sarcastic": 4,
+        "not_sarcastic": 2
+      }
+    }
+  },
+  "GS": {
+    "accuracy": 0.5,
+    "macro_f1": 0.4857142857142857,
+    "confusion_matrix_gold_by_prediction": {
+      "sarcastic": {
+        "sarcastic": 2,
+        "not_sarcastic": 4
+      },
+      "not_sarcastic": {
+        "sarcastic": 2,
+        "not_sarcastic": 4
+      }
+    }
+  }
+}

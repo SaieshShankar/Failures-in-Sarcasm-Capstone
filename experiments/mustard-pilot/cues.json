@@ -1,0 +1,338 @@
+{
+  "2_180": {
+    "audio": {
+      "frames": 156,
+      "functional_columns": 88,
+      "voiced_frames": 49,
+      "median_f0_hz": 425.6,
+      "f0_p10_to_p90_semitones": 13.53,
+      "median_opensmile_loudness": 0.486
+    },
+    "video": {
+      "frames": 38,
+      "usable_frames": 37,
+      "min_confidence": 0.8,
+      "landmark_model": "CLNF general",
+      "coverage": 0.974,
+      "track_scope": "automatically selected face; speaker attribution unverified",
+      "median_au12_lip_corner_pull_intensity": 1.82,
+      "median_au04_brow_lower_intensity": 0.0,
+      "median_gaze_angle_deg": [
+        -25.9,
+        23.15
+      ],
+      "median_head_pitch_yaw_deg": [
+        15.41,
+        36.15
+      ]
+    }
+  },
+  "2_405": {
+    "audio": {
+      "frames": 243,
+      "functional_columns": 88,
+      "voiced_frames": 129,
+      "median_f0_hz": 201.3,
+      "f0_p10_to_p90_semitones": 6.79,
+      "median_opensmile_loudness": 1.056
+    },
+    "video": {
+      "frames": 59,
+      "usable_frames": 59,
+      "min_confidence": 0.8,
+      "landmark_model": "CLNF general",
+      "coverage": 1.0,
+      "track_scope": "automatically selected face; speaker attribution unverified",
+      "median_au12_lip_corner_pull_intensity": 0.05,
+      "median_au04_brow_lower_intensity": 0.94,
+      "median_gaze_angle_deg": [
+        19.42,
+        18.79
+      ],
+      "median_head_pitch_yaw_deg": [
+        12.66,
+        -17.3
+      ]
+    }
+  },
+  "2_337": {
+    "audio": {
+      "frames": 279,
+      "functional_columns": 88,
+      "voiced_frames": 180,
+      "median_f0_hz": 244.3,
+      "f0_p10_to_p90_semitones": 2.78,
+      "median_opensmile_loudness": 0.613
+    },
+    "video": {
+      "frames": 68,
+      "usable_frames": 67,
+      "min_confidence": 0.8,
+      "landmark_model": "CLNF general",
+      "coverage": 0.985,
+      "track_scope": "automatically selected face; speaker attribution unverified",
+      "median_au12_lip_corner_pull_intensity": 0.0,
+      "median_au04_brow_lower_intensity": 0.0,
+      "median_gaze_angle_deg": [
+        -11.92,
+        16.21
+      ],
+      "median_head_pitch_yaw_deg": [
+        12.61,
+        14.73
+      ]
+    }
+  },
+  "2_105": {
+    "audio": {
+      "frames": 778,
+      "functional_columns": 88,
+      "voiced_frames": 321,
+      "median_f0_hz": 158.9,
+      "f0_p10_to_p90_semitones": 6.29,
+      "median_opensmile_loudness": 0.605
+    },
+    "video": {
+      "frames": 235,
+      "usable_frames": 212,
+      "min_confidence": 0.8,
+      "landmark_model": "CLNF general",
+      "coverage": 0.902,
+      "track_scope": "automatically selected face; speaker attribution unverified",
+      "median_au12_lip_corner_pull_intensity": 0.17,
+      "median_au04_brow_lower_intensity": 0.92,
+      "median_gaze_angle_deg": [
+        -40.54,
+        20.34
+      ],
+      "median_head_pitch_yaw_deg": [
+        35.18,
+        52.74
+      ]
+    }
+  },
+  "2_408": {
+    "audio": {
+      "frames": 619,
+      "functional_columns": 88,
+      "voiced_frames": 266,
+      "median_f0_hz": 205.6,
+      "f0_p10_to_p90_semitones": 10.5,
+      "median_opensmile_loudness": 0.378
+    },
+    "video": {
+      "frames": 156,
+      "usable_frames": 128,
+      "min_confidence": 0.8,
+      "landmark_model": "CLNF general",
+      "coverage": 0.821,
+      "track_scope": "automatically selected face; speaker attribution unverified",
+      "median_au12_lip_corner_pull_intensity": 0.18,
+      "median_au04_brow_lower_intensity": 0.97,
+      "median_gaze_angle_deg": [
+        19.22,
+        20.54
+      ],
+      "median_head_pitch_yaw_deg": [
+        18.31,
+        -22.32
+      ]
+    }
+  },
+  "2_254": {
+    "audio": {
+      "frames": 247,
+      "functional_columns": 88,
+      "voiced_frames": 122,
+      "median_f0_hz": 180.6,
+      "f0_p10_to_p90_semitones": 12.57,
+      "median_opensmile_loudness": 0.787
+    },
+    "video": {
+      "frames": 60,
+      "usable_frames": 60,
+      "min_confidence": 0.8,
+      "landmark_model": "CLNF general",
+      "coverage": 1.0,
+      "track_scope": "automatically selected face; speaker attribution unverified",
+      "median_au12_lip_corner_pull_intensity": 0.0,
+      "median_au04_brow_lower_intensity": 1.92,
+      "median_gaze_angle_deg": [
+        11.17,
+        14.55
+      ],
+      "median_head_pitch_yaw_deg": [
+        10.08,
+        -3.9
+      ]
+    }
+  },
+  "1_6092": {
+    "audio": {
+      "frames": 896,
+      "functional_columns": 88,
+      "voiced_frames": 338,
+      "median_f0_hz": 186.0,
+      "f0_p10_to_p90_semitones": 16.83,
+      "median_opensmile_loudness": 1.221
+    },
+    "video": {
+      "frames": 216,
+      "usable_frames": 203,
+      "min_confidence": 0.8,
+      "landmark_model": "CLNF general",
+      "coverage": 0.94,
+      "track_scope": "automatically selected face; speaker attribution unverified",
+      "median_au12_lip_corner_pull_intensity": 0.42,
+      "median_au04_brow_lower_intensity": 0.26,
+      "median_gaze_angle_deg": [
+        20.97,
+        14.67
+      ],
+      "median_head_pitch_yaw_deg": [
+        12.2,
+        -23.15
+      ]
+    }
+  },
+  "2_160": {
+    "audio": {
+      "frames": 1117,
+      "functional_columns": 88,
+      "voiced_frames": 141,
+      "median_f0_hz": 135.0,
+      "f0_p10_to_p90_semitones": 19.54,
+      "median_opensmile_loudness": 1.378
+    },
+    "video": {
+      "frames": 336,
+      "usable_frames": 334,
+      "min_confidence": 0.8,
+      "landmark_model": "CLNF general",
+      "coverage": 0.994,
+      "track_scope": "automatically selected face; speaker attribution unverified",
+      "median_au12_lip_corner_pull_intensity": 0.07,
+      "median_au04_brow_lower_intensity": 0.34,
+      "median_gaze_angle_deg": [
+        -29.02,
+        31.31
+      ],
+      "median_head_pitch_yaw_deg": [
+        25.38,
+        27.67
+      ]
+    }
+  },
+  "2_494": {
+    "audio": {
+      "frames": 418,
+      "functional_columns": 88,
+      "voiced_frames": 167,
+      "median_f0_hz": 190.9,
+      "f0_p10_to_p90_semitones": 10.3,
+      "median_opensmile_loudness": 0.819
+    },
+    "video": {
+      "frames": 106,
+      "usable_frames": 103,
+      "min_confidence": 0.8,
+      "landmark_model": "CLNF general",
+      "coverage": 0.972,
+      "track_scope": "automatically selected face; speaker attribution unverified",
+      "median_au12_lip_corner_pull_intensity": 0.0,
+      "median_au04_brow_lower_intensity": 1.13,
+      "median_gaze_angle_deg": [
+        36.38,
+        14.27
+      ],
+      "median_head_pitch_yaw_deg": [
+        2.46,
+        -40.62
+      ]
+    }
+  },
+  "2_94": {
+    "audio": {
+      "frames": 217,
+      "functional_columns": 88,
+      "voiced_frames": 77,
+      "median_f0_hz": 162.2,
+      "f0_p10_to_p90_semitones": 5.09,
+      "median_opensmile_loudness": 0.343
+    },
+    "video": {
+      "frames": 53,
+      "usable_frames": 53,
+      "min_confidence": 0.8,
+      "landmark_model": "CLNF general",
+      "coverage": 1.0,
+      "track_scope": "automatically selected face; speaker attribution unverified",
+      "median_au12_lip_corner_pull_intensity": 0.0,
+      "median_au04_brow_lower_intensity": 2.07,
+      "median_gaze_angle_deg": [
+        -50.59,
+        -1.15
+      ],
+      "median_head_pitch_yaw_deg": [
+        -117.06,
+        78.15
+      ]
+    }
+  },
+  "1_2614": {
+    "audio": {
+      "frames": 397,
+      "functional_columns": 88,
+      "voiced_frames": 232,
+      "median_f0_hz": 147.2,
+      "f0_p10_to_p90_semitones": 6.92,
+      "median_opensmile_loudness": 1.622
+    },
+    "video": {
+      "frames": 96,
+      "usable_frames": 77,
+      "min_confidence": 0.8,
+      "landmark_model": "CLNF general",
+      "coverage": 0.802,
+      "track_scope": "automatically selected face; speaker attribution unverified",
+      "median_au12_lip_corner_pull_intensity": 0.0,
+      "median_au04_brow_lower_intensity": 0.27,
+      "median_gaze_angle_deg": [
+        -52.71,
+        31.63
+      ],
+      "median_head_pitch_yaw_deg": [
+        127.25,
+        73.85
+      ]
+    }
+  },
+  "2_303": {
+    "audio": {
+      "frames": 553,
+      "functional_columns": 88,
+      "voiced_frames": 60,
+      "median_f0_hz": 187.7,
+      "f0_p10_to_p90_semitones": 6.51,
+      "median_opensmile_loudness": 1.396
+    },
+    "video": {
+      "frames": 140,
+      "usable_frames": 110,
+      "min_confidence": 0.8,
+      "landmark_model": "CLNF general",
+      "coverage": 0.786,
+      "track_scope": "automatically selected face; speaker attribution unverified",
+      "median_au12_lip_corner_pull_intensity": 0.16,
+      "median_au04_brow_lower_intensity": 0.61,
+      "median_gaze_angle_deg": [
+        -0.11,
+        22.12
+      ],
+      "median_head_pitch_yaw_deg": [
+        25.3,
+        -1.2
+      ]
+    }
+  }
+}

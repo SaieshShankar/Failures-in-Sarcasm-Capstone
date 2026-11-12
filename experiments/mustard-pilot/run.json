@@ -1,0 +1,50 @@
+{
+  "date": "2026-11-12",
+  "dataset": "Original MUStARD (ACL 2019)",
+  "dataset_paper": "https://aclanthology.org/P19-1455/",
+  "annotations": "https://github.com/soujanyaporia/MUStARD/blob/master/data/sarcasm_data.json",
+  "annotation_blob_sha": "cde122e8677130bb699d4cb8a9dfed72d7a0888b",
+  "archive": "https://huggingface.co/datasets/MichiganNLP/MUStARD/blob/2befb0580937502caf43fe09dfdcd3866477c670/mmsd_raw_data.zip",
+  "archive_sha256_verified": "a2e68c48b7d13c66af98900dc5119b54b3b0bf962c228d99069cb0930c3880d5",
+  "sample": {
+    "seed": 401,
+    "count": 12,
+    "eligible_labeled_clips": 690,
+    "selection": "Uniform random sampling within each gold label, with six clips per class.",
+    "shows": {
+      "FRIENDS": 10,
+      "BBT": 2
+    },
+    "input_scope": "Target utterance only."
+  },
+  "runtime": {
+    "platform": "Windows x64 CPU",
+    "python": "3.11.5",
+    "llama_cpp_build": 12318,
+    "llama_cpp_commit": "7021f7e09",
+    "ffmpeg_for_model": "9.0.2",
+    "opensmile": "2.6.0, eGeMAPS v02",
+    "openface": "2.2.0, CLNF general"
+  },
+  "model": {
+    "weights": "gemma-4-E2B-it-Q4_0.gguf",
+    "projector": "mmproj-gemma-4-E2B-it-Q8_0.gguf",
+    "weights_revision": "2a8538c2e2d4687953a86c422c7c623cfd022880",
+    "temperature": 0,
+    "context_tokens": 4096,
+    "grammar_constrained_json": true
+  },
+  "IS": {
+    "video_max_width": 320,
+    "video_frames_per_second": 2,
+    "audio": "Full decoded target waveform, mono at 16 kHz."
+  },
+  "GS": {
+    "video": "OpenFace observations from the original target frames, tracking confidence cutoff 0.8.",
+    "audio": "openSMILE observations from the same decoded target waveform."
+  },
+  "clip_quality": {
+    "clips_with_voiced_frames": 12,
+    "clips_with_usable_face_frames": 12
+  }
+}

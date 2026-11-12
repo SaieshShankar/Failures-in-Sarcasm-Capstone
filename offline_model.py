@@ -6,8 +6,12 @@ import subprocess
 import tempfile
 from pathlib import Path
 
+from grounded import ffmpeg_path, run
+
 
 class OfflineModel:
+    video_max_width = 320
+
     def __init__(self, executable, weights, projector, ffmpeg_dir):
         self.name = weights.stem
         self.command = [
@@ -29,7 +33,12 @@ class OfflineModel:
             if video is None:
                 stdin = (prompt + "\n/exit\n").encode("utf-8")
             else:
-                command += ["--video", str(video), "--audio", str(wav), "-p", prompt]
+                model_video = Path(temporary) / "model-input.mp4"
+                run([ffmpeg_path(), "-nostdin", "-i", str(video),
+                     "-vf", f"scale=w='min(iw,{self.video_max_width})':h=-2",
+                     "-an", "-c:v", "libx264", "-preset", "fast", str(model_video)],
+                    video.parent / "model-video.log")
+                command += ["--video", str(model_video), "--audio", str(wav), "-p", prompt]
                 stdin = b""
             try:
                 result = subprocess.run(command, input=stdin, capture_output=True, timeout=240)

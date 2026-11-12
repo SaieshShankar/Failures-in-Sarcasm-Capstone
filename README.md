@@ -35,6 +35,8 @@ Download the [original annotations](https://github.com/soujanyaporia/MUStARD/blo
 
 The original MUStARD release is a separate benchmark from MUStARD++R. Keep the dataset name in all result summaries.
 
+The [12-clip pilot](experiments/mustard-pilot/run.json) uses six clips from each gold class and seed 401. The [per-clip comparison](experiments/mustard-pilot/comparison.csv) and [aggregate metrics](experiments/mustard-pilot/summary.json) are available alongside the [extracted cues](experiments/mustard-pilot/cues.json). Ten clips come from Friends and two from The Big Bang Theory. Treat this as a feasibility check.
+
 ## MUStARD++R input
 
 Use the [authors' MCIB release instructions](https://github.com/sljgkjhwe/MCIB#quick-start) for the Quark share and extraction code. Obtain the **R** edition's cleaned target-utterance media and corresponding gold labels. Inspect the release before normalization. Keep these files under `data/`, which is ignored by Git. Check that the clip plays, includes an audio stream, and corresponds to the text before sampling. The annotation export schema below is the runner's normalized input. If the release uses a different schema, convert from the official IDs, target utterances, and gold labels. Name each local MP4 after its official clip ID.
@@ -78,7 +80,7 @@ To run without opening a network socket, use the same llama.cpp release's `llama
   .local\ffmpeg\bin
 ```
 
-Substitute the FFmpeg directory from your setup. The offline runner uses CPU inference, two sampled video frames per second, and the decoded waveform for IS. GS sends the same transcript and measured cues as text.
+Substitute the FFmpeg directory from your setup. For IS, the offline runner caps video width at 320 pixels, samples two frames per second, and passes the decoded waveform separately. GS sends the same transcript and cues measured from the original video frames and waveform.
 
 Inspect `predictions.jsonl`, `comparison.csv`, `summary.json`, and each clip's `cues.json`. Record model files and runtime version alongside any shared results. The pilot measures performance on a small convenience sample from accessible official clips. A disagreement between IS and GS alone does not identify a perception or reasoning failure.
 
