@@ -1,4 +1,4 @@
-"""Join verified MUStARD++R annotation IDs to local target-utterance video files."""
+"""Join MUStARD annotation IDs to local target-utterance video files."""
 
 import argparse
 import json
@@ -6,7 +6,10 @@ import random
 from pathlib import Path
 
 
-def prepare(annotations, media_dir, count, seed):
+DATASETS = ("MUStARD", "MUStARD++R")
+
+
+def prepare(annotations, media_dir, count, seed, dataset="MUStARD++R"):
     records = json.loads(annotations.read_text(encoding="utf-8-sig"))
     if not isinstance(records, dict):
         raise ValueError("Expected an object mapping clip IDs to annotations. See README.")
@@ -36,7 +39,7 @@ def prepare(annotations, media_dir, count, seed):
     rng = random.Random(seed)
     selected = rng.sample(by_label[True], count // 2) + rng.sample(by_label[False], count // 2)
     rng.shuffle(selected)
-    return {"dataset": "MUStARD++R", "seed": seed, "missing_media_count": len(missing), "clips": selected}
+    return {"dataset": dataset, "seed": seed, "missing_media_count": len(missing), "clips": selected}
 
 
 def main():
@@ -44,10 +47,11 @@ def main():
     parser.add_argument("annotations", type=Path)
     parser.add_argument("media_dir", type=Path)
     parser.add_argument("manifest", type=Path)
+    parser.add_argument("--dataset", choices=DATASETS, default="MUStARD++R")
     parser.add_argument("--count", type=int, choices=range(2, 21, 2), default=12)
     parser.add_argument("--seed", type=int, default=401)
     args = parser.parse_args()
-    result = prepare(args.annotations, args.media_dir, args.count, args.seed)
+    result = prepare(args.annotations, args.media_dir, args.count, args.seed, args.dataset)
     with args.manifest.open("x", encoding="utf-8") as destination:
         json.dump(result, destination, ensure_ascii=False, indent=2)
         destination.write("\n")

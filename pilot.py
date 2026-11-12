@@ -1,4 +1,4 @@
-"""Run a paired IS/GS pilot against a local, token-free llama.cpp server."""
+"""Run a paired IS/GS pilot locally with llama.cpp."""
 
 import argparse
 import base64
@@ -11,6 +11,8 @@ from urllib.error import HTTPError
 from urllib.request import ProxyHandler, Request, build_opener
 
 from grounded import extract_waveform, ffmpeg_path, resolve_openface, run, write_cues
+from offline_model import OfflineModel
+from prepare_mustard import DATASETS
 
 
 LABELS = ("sarcastic", "not_sarcastic")
@@ -37,12 +39,26 @@ def inline_media(kind, path):
     return {"type": kind, kind: {"data": base64.b64encode(path.read_bytes()).decode("ascii")}}
 
 
-def predict(port, model, transcript, *, video=None, wav=None, cues=None):
-    content = [{"type": "text", "text": f"{INSTRUCTION}\n\nTarget transcript: {json.dumps(transcript, ensure_ascii=False)}"}]
+def target_prompt(transcript):
+    return f"{INSTRUCTION}\n\nTarget transcript: {json.dumps(transcript, ensure_ascii=False)}"
+
+
+def check_audio_duration(wav):
+    with wave.open(str(wav), "rb") as audio:
+        if audio.getnframes() > 30 * audio.getframerate():
+            raise ValueError("Gemma 4 E2B accepts up to 30 seconds of audio per clip.")
+
+
+def predict(port, model, transcript, *, video=None, wav=None, cues=None, offline=None):
+    prompt = target_prompt(transcript)
     if cues is None:
-        with wave.open(str(wav), "rb") as audio:
-            if audio.getnframes() > 30 * audio.getframerate():
-                raise ValueError("Gemma 4 E2B accepts up to 30 seconds of audio per clip.")
+        check_audio_duration(wav)
+    if offline is not None:
+        if cues is not None:
+            prompt += "\nMeasured observations:\n" + json.dumps(cues)
+        return offline(prompt, LABELS, video=video, wav=wav)
+    content = [{"type": "text", "text": prompt}]
+    if cues is None:
         content.extend([inline_media("input_video", video), inline_media("input_audio", wav)])
     else:
         content.append({"type": "text", "text": "Measured observations:\n" + json.dumps(cues, indent=2)})
@@ -89,16 +105,16 @@ def prepare_inputs(media, output):
     return wav, video
 
 
-def run_pilot(manifest, output, executable, port):
+def run_pilot(manifest, output, executable, port, offline=None):
     clips = manifest.get("clips", [])
-    if manifest.get("dataset") != "MUStARD++R" or not clips:
-        raise ValueError("Expected a nonempty MUStARD++R manifest.")
+    if manifest.get("dataset") not in DATASETS or not clips:
+        raise ValueError("Expected a nonempty MUStARD or MUStARD++R manifest.")
     ids = [clip["id"] for clip in clips]
     if len(set(ids)) != len(ids) or any(not re.fullmatch(r"[A-Za-z0-9_-]+", item) for item in ids):
         raise ValueError("Manifest clip IDs must be distinct safe directory names.")
     if any(clip["label"] not in LABELS or not clip["transcript"].strip() for clip in clips):
         raise ValueError("Each clip needs a canonical label and a transcript.")
-    model = server_json(port, "/v1/models")["data"][0]["id"]
+    model = offline.name if offline else server_json(port, "/v1/models")["data"][0]["id"]
     output = output.resolve()
     output.mkdir(parents=True, exist_ok=False)
     rows = []
@@ -115,12 +131,12 @@ def run_pilot(manifest, output, executable, port):
                 row["IS"]["error"] = row["GS"]["error"] = str(error)
             else:
                 try:
-                    row["IS"] = predict(port, model, clip["transcript"], video=video, wav=wav)
+                    row["IS"] = predict(port, model, clip["transcript"], video=video, wav=wav, offline=offline)
                 except (OSError, RuntimeError, ValueError, KeyError) as error:
                     row["IS"]["error"] = str(error)
                 try:
                     cues = write_cues(wav, video, executable, evidence)
-                    row["GS"] = predict(port, model, clip["transcript"], cues=cues)
+                    row["GS"] = predict(port, model, clip["transcript"], cues=cues, offline=offline)
                 except (OSError, RuntimeError, ValueError, KeyError) as error:
                     row["GS"]["error"] = str(error)
             rows.append(row)
@@ -147,9 +163,13 @@ def main():
     parser.add_argument("--openface", required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--port", type=int, default=8080)
+    parser.add_argument("--offline", nargs=4, type=Path,
+                        metavar=("LLAMA_MTMD_CLI", "MODEL", "MMPROJ", "VIDEO_FFMPEG_DIR"),
+                        help="Run llama.cpp directly on CPU without the local HTTP server")
     args = parser.parse_args()
     manifest = json.loads(args.manifest.read_text(encoding="utf-8-sig"))
-    summary = run_pilot(manifest, args.output, resolve_openface(args.openface), args.port)
+    offline = OfflineModel(*args.offline) if args.offline else None
+    summary = run_pilot(manifest, args.output, resolve_openface(args.openface), args.port, offline)
     print(json.dumps(summary, indent=2))
     if summary["paired_clips"] != summary["requested_clips"]:
         raise SystemExit("Pilot incomplete. See predictions.jsonl for per-condition errors.")

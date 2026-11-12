@@ -25,6 +25,16 @@ The smoke command writes timestamped eGeMAPS v02 descriptors, 88 clip-level audi
 
 See [Windows smoke results](experiments/windows-smoke.json) for the verified extractor and local model outputs. The MUStARD++R comparison is pending access to the official clips and labels.
 
+## Original MUStARD input
+
+Download the [original annotations](https://github.com/soujanyaporia/MUStARD/blob/master/data/sarcasm_data.json) and the [public video ZIP](https://huggingface.co/datasets/MichiganNLP/MUStARD/blob/main/mmsd_raw_data.zip). Save the annotations as `data/sarcasm_data.json` and extract the ZIP under `data/mustard`. Use the target utterances in `utterances_final`.
+
+```powershell
+& $capPython prepare_mustard.py data\sarcasm_data.json data\mustard\utterances_final data\mustard-pilot.json --dataset MUStARD --count 12 --seed 401
+```
+
+The original MUStARD release is a separate benchmark from MUStARD++R. Keep the dataset name in all result summaries.
+
 ## MUStARD++R input
 
 Use the [authors' MCIB release instructions](https://github.com/sljgkjhwe/MCIB#quick-start) for the Quark share and extraction code. Obtain the **R** edition's cleaned target-utterance media and corresponding gold labels. Inspect the release before normalization. Keep these files under `data/`, which is ignored by Git. Check that the clip plays, includes an audio stream, and corresponds to the text before sampling. The annotation export schema below is the runner's normalized input. If the release uses a different schema, convert from the official IDs, target utterances, and gold labels. Name each local MP4 after its official clip ID.
@@ -55,6 +65,20 @@ In a second terminal from the same directory:
 ```powershell
 & .\.venv\Scripts\python.exe pilot.py data\pilot.json --openface .local\openface\OpenFace_2.2.0_win_x64\FeatureExtraction.exe --output runs\mustard-r-pilot
 ```
+
+For original MUStARD, pass `data\mustard-pilot.json` and use a fresh output directory such as `runs\mustard-pilot`.
+
+To run without opening a network socket, use the same llama.cpp release's `llama-mtmd-cli.exe`:
+
+```powershell
+& $capPython pilot.py data\mustard-pilot.json --openface $capOpenFace --output runs\mustard-pilot --offline `
+  .local\llama\llama-mtmd-cli.exe `
+  .local\gemma-4-E2B-it-Q4_0.gguf `
+  .local\mmproj-gemma-4-E2B-it-Q8_0.gguf `
+  .local\ffmpeg\bin
+```
+
+Substitute the FFmpeg directory from your setup. The offline runner uses CPU inference, two sampled video frames per second, and the decoded waveform for IS. GS sends the same transcript and measured cues as text.
 
 Inspect `predictions.jsonl`, `comparison.csv`, `summary.json`, and each clip's `cues.json`. Record model files and runtime version alongside any shared results. The pilot measures performance on a small convenience sample from accessible official clips. A disagreement between IS and GS alone does not identify a perception or reasoning failure.
 
