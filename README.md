@@ -14,7 +14,7 @@ The runner writes the reference label and both predictions side by side. It comp
 Use 64-bit Python 3.11 and the Microsoft x64 Visual C++ redistributable required by [OpenFace](https://github.com/TadasBaltrusaitis/OpenFace/wiki/Windows-Installation). From the repository directory in PowerShell:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\setup_windows.ps1
+& .\setup_windows.ps1
 $capPython = '.\.venv\Scripts\python.exe'
 $capOpenFace = '.\.local\openface\OpenFace_2.2.0_win_x64\FeatureExtraction.exe'
 curl.exe -fL -o .local\default.wmv https://raw.githubusercontent.com/TadasBaltrusaitis/OpenFace/master/samples/default.wmv
@@ -22,6 +22,8 @@ curl.exe -fL -o .local\default.wmv https://raw.githubusercontent.com/TadasBaltru
 ```
 
 The smoke command writes timestamped eGeMAPS v02 descriptors, 88 clip-level audio functionals, a frame-level OpenFace CSV, and `cues.json`. It exits unsuccessfully if either voiced audio frames or usable face frames are absent. OpenFace uses its bundled **CLNF general** landmark tracker. The confidence cutoff is 0.8. The automatically selected face is unverified as the speaker, and gaze, head pose, and action-unit intensities are observations. Output directories must be new so each run has its own evidence.
+
+See [Windows smoke results](experiments/windows-smoke.json) for the verified extractor and local model outputs. The MUStARD++R comparison is pending access to the official clips and labels.
 
 ## MUStARD++R input
 

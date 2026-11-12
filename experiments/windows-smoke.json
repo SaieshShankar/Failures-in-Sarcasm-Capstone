@@ -1,0 +1,114 @@
+{
+  "date": "2026-11-12",
+  "environment": {
+    "platform": "Windows x64",
+    "python": "3.11.5",
+    "opensmile": "2.6.0",
+    "openface": "2.2.0 / CLNF general",
+    "local_model": "Gemma 4 E2B IT Q4_0 with Q8_0 multimodal projector",
+    "model_revision": "2a8538c2e2d4687953a86c422c7c623cfd022880",
+    "runtime": "llama.cpp b12318, CPU, 2 video frames per second",
+    "ffmpeg_for_model": "9.0.2"
+  },
+  "extractors": {
+    "fixture": "OpenFace upstream samples/default.wmv",
+    "source": "https://raw.githubusercontent.com/TadasBaltrusaitis/OpenFace/master/samples/default.wmv",
+    "cues": {
+      "audio": {
+        "frames": 1896,
+        "functional_columns": 88,
+        "voiced_frames": 22,
+        "median_f0_hz": 156.8,
+        "f0_p10_to_p90_semitones": 4.72,
+        "median_opensmile_loudness": 0.126
+      },
+      "video": {
+        "frames": 288,
+        "usable_frames": 288,
+        "min_confidence": 0.8,
+        "landmark_model": "CLNF general",
+        "coverage": 1,
+        "track_scope": "automatically selected face; speaker attribution unverified",
+        "median_au12_lip_corner_pull_intensity": 0,
+        "median_au04_brow_lower_intensity": 0.48,
+        "median_gaze_angle_deg": [
+          6.99,
+          6.04
+        ],
+        "median_head_pitch_yaw_deg": [
+          -3.61,
+          -6.36
+        ]
+      }
+    }
+  },
+  "model_smoke": {
+    "fixture": "First three seconds of upstream demo video, resized to 320 pixels wide, with synthesized speech replacing the soundtrack",
+    "transcript": "The package arrived today.",
+    "gold": null,
+    "cues": {
+      "audio": {
+        "frames": 218,
+        "functional_columns": 88,
+        "voiced_frames": 101,
+        "median_f0_hz": 170.4,
+        "f0_p10_to_p90_semitones": 7.17,
+        "median_opensmile_loudness": 0.32
+      },
+      "video": {
+        "frames": 45,
+        "usable_frames": 45,
+        "min_confidence": 0.8,
+        "landmark_model": "CLNF general",
+        "coverage": 1,
+        "track_scope": "automatically selected face; speaker attribution unverified",
+        "median_au12_lip_corner_pull_intensity": 0,
+        "median_au04_brow_lower_intensity": 0.9,
+        "median_gaze_angle_deg": [
+          9.17,
+          2.98
+        ],
+        "median_head_pitch_yaw_deg": [
+          -1.38,
+          -7.45
+        ]
+      }
+    },
+    "results": {
+      "kind": "unlabeled_model_smoke",
+      "IS": {
+        "prediction": "not_sarcastic",
+        "response": "{\n  \"label\": \"not_sarcastic\"\n}",
+        "model": "gemma-4-e2b-it",
+        "usage": {
+          "completion_tokens": 21,
+          "prompt_tokens": 639,
+          "total_tokens": 660,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      },
+      "GS": {
+        "prediction": "not_sarcastic",
+        "response": "{\n  \"label\": \"not_sarcastic\"\n}",
+        "model": "gemma-4-e2b-it",
+        "usage": {
+          "completion_tokens": 21,
+          "prompt_tokens": 369,
+          "total_tokens": 390,
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        }
+      }
+    }
+  },
+  "benchmark": {
+    "dataset": "MUStARD++R",
+    "status": "blocked",
+    "official_release_host": "Quark Netdisk",
+    "reason": "Network returned HTTP 403 for the published share. Archive contents and playable media remain unverified.",
+    "paired_clips": 0
+  }
+}
